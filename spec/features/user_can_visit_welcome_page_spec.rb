@@ -12,21 +12,18 @@ describe "user can visit the welcome page", type: :view do
     visit '/'
 
     select "Turing"
-# ["Turing", "1331 17th St, Denver, CO 80202"]
+
     click_on "Find Nearest Station"
 
     expect(current_path).to eq("/search")
-    # Then I should see the closest electric fuel station to me.
-    # For that station I should see
-    # expect(page).to have_content(station.name)
-    # expect(page).to have_content(station.address)
-    # expect(page).to have_content(station.fuel_type)
-    # expect(page).to have_content(station.access_times)
+
+    expect(page).to have_content("16M BUILDING 16M B-1")
+    expect(page).to have_content("1550 Market St,Denver,CO,80202")
+    expect(page).to have_content("ELEC")
+    expect(page).to have_content("24 hours daily")
+    expect(page).to have_content("0.1 miles") 
+    expect(page).to have_content("1 min")
+    directions = "Start out going southeast on 17th St toward Larimer St/CO-33. Turn right onto Larimer St/CO-33. Turn right onto 15th St/CO-33. Turn right onto Market St. 1550 MARKET ST is on the right."
+    expect(page).to have_content(directions)
   end
 end
-
-# I should also see:
-# - the distance of the nearest station (should be 0.1 miles)
-# - the travel time from Turing to that fuel station (should be 1 min)
-# - The direction instructions to get to that fuel station
-#   "Turn left onto Lawrence St Destination will be on the left"

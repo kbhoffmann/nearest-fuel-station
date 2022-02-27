@@ -1,10 +1,14 @@
 <h1>Nearest Station</h1>
 
-<p>Station Name:<%= @station.name %></p>
-<p>Station Address:<%= @station.address %></p>
-<p>Fuel Type:<%= @station.fuel_type %></p>
-<p>Access Times:<%= @station.access_times %></p>
+<p>Station Name: <%= @station_name %></p>
+<p>Station Address: <%= @station_address %></p>
+<p>Fuel Type: <%= @fuel_type %></p>
+<p>Access Times: <%= @access_times %></p>
 
-<p>Distance to Station: <%= @station.distance %></p>
-<p>Travel Time to Station: <%= @station.travel_time %></p>
-<p>Directions to Station: <%= @station.directions %></p>
+<p>Distance to Station: <%= "#{@distance.round(1).to_s} miles" %></p>
+<p>Travel Time to Station:<%= Time.at(@travel_time).utc.strftime("%M").to_i.to_s %> min</p>
+
+<h4>Directions:</h4>
+<% @directions.each do |direction| %>
+    <%= direction %>
+<% end %>
