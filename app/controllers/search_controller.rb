@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   def index
-    searched_address = params[:location]#"1331 17th St, Denver, CO 80202"
+    searched_address = params[:location]
 
     fuel_conn = Faraday.new(url: 'https://developer.nrel.gov')
     fuel_api_response = fuel_conn.get('/api/alt-fuel-stations/v1/nearest.json?limit=1') do |request|
@@ -15,8 +15,8 @@ class SearchController < ApplicationController
     @station_name = fuel_station_details[:station_name]
     @fuel_type = fuel_station_details[:fuel_type_code]
     @access_times = fuel_station_details[:access_days_time]
-    @distance = fuel_station_details[:distance] #= 0.12268 (float)
-    #"0.1 miles"
+    @distance = fuel_station_details[:distance]
+    
     street_address = fuel_station_details[:street_address]
     city = fuel_station_details[:city]
     state = fuel_station_details[:state]
@@ -31,7 +31,7 @@ class SearchController < ApplicationController
     end
 
     directions_data = JSON.parse(map_api_response.body, symbolize_names: true)
-    @travel_time = directions_data[:route][:legs][0][:time] #=60(ingteger) seconds
+    @travel_time = directions_data[:route][:legs][0][:time]
 
     @directions = []
     directions_data[:route][:legs][0][:maneuvers].each do |maneuver|
